@@ -2,6 +2,15 @@ import fetch from 'node-fetch';
 import { JSDOM } from 'jsdom';
 
 export default async function handler(req, res) {
+    // Configuração CORS
+    res.setHeader('Access-Control-Allow-Origin', '*'); // Permite todas as origens
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+
+    if (req.method === 'OPTIONS') {
+        res.status(200).end();
+        return;
+    }
+
     const { codigo } = req.query;
     const url = `https://www.saojoaofarmacias.com.br/${codigo}`;
 
